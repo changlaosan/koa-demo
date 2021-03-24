@@ -1,8 +1,9 @@
-前言
+## 前言
 最近对koa这个框架接触颇多，毕竟也属于node模块的东西，就多了解了一些，就在这里留下一些自己的心得。
 之后如果我司某位前端也需要自己写接口，可以借鉴，入手会快一些。
 当然，这只是快速入手，写一些简单增删改查，一些复杂业务需要借鉴官方文档。
-一、安装
+## 一、安装
+```bash
 npm i -y // 初始化一个webpack
 npm i koa koa-router -s // 安装koa以及路由
 // 安装babel，方便使用新语法
@@ -21,8 +22,10 @@ npm install babel-cli -g
 "scripts": { // 运行命令
     "start": "nodemon --exec babel-node app.js"
 }
-二、入口文件
+```
+## 二、入口文件
 1、手动新建一个app.js入口文件
+```bash
 // 导入koa
 import Koa from 'koa';
 // 实例化Koa对象
@@ -35,9 +38,11 @@ app.use(async (ctx, next) => {
 });
 // 监听端口
 app.listen(3000， () => console.log('server Connected'));
+```
 2、运行npm start，就可以通过访问本地端口查看了
-三、中间件
+## 三、中间件
 这算是koa的执行逻辑吧，搞清楚我们就能愉快的写代码了。核心代码如下：
+```bash
 app.use(async (ctx, next) => {
     await next();
     ctx.response.type = 'text/html';
@@ -70,11 +75,15 @@ app.use(async (ctx, next) => {
         ctx.response.status = 403;
     }
 });
-四、路由
+```
+## 四、路由
 这里我们使用koa-router，它可以将请求的的URL和方法，匹配到对应的逻辑代码中。
 1、安装
+```bash
 npm install koa-router --save
+```
 2、调用
+```bash
 import Koa from 'koa';
 import Router from 'koa-router'; // 引入koa-router
 const app = new Koa();
@@ -93,10 +102,12 @@ app.use(router.allowedMethods({
     // methodNotAllowed: () => '不支持的请求方式'
 }));
 app.listen(3000， () => console.log('server Connected'));
+```
 3、请求方法
 Koa-router 请求方式： get 、 put 、 post 、 patch 、 delete 、 del ；
 使用方法就是 router.方式() ，比如 router.get() 和 router.post()
 而 router.all() 会匹配所有的请求方法
+```bash
 router.get('/', async (ctx) => {
     ctx.type = 'html';
     ctx.body = '<h1>hello world!</h1>';
@@ -122,7 +133,9 @@ router.get('/', async (ctx) => {
     .all("/users/:id", async (ctx) => {
         ctx.body = ctx.params;
     });
+```
 4、获取参数
+```bash
 // params参数
 router.get('/:category/:title', (ctx, next) => {
   console.log(ctx.params);
@@ -133,7 +146,9 @@ router.get("/users", async (ctx) => {
     console.log('查询参数', ctx.query);
     ctx.body = '获取用户列表';
 })
+```
 5、使用中间件
+```bash
 router.get(
   '/users/:id',
   (ctx, next) => {
@@ -142,9 +157,13 @@ router.get(
   },
   ctx => {...}
 );
+```
 6、设置路由前缀
+```bash
 router.prefix('/api/user')
+```
 7、路由嵌套
+```bash
 // 有些路由设计很多模块，这时就需要用到嵌套
 var forums = new Router();
 var posts = new Router();
@@ -153,8 +172,10 @@ posts.get('/:pid', (ctx, next) => {...});
 forums.use('/forums/:fid/posts', posts.routes(), posts.allowedMethods());
 // responds to "/forums/123/posts" and "/forums/123/posts/123"
 app.use(forums.routes());
+```
 8、拆分路由
 app.js文件
+```bash
 const Koa = require('koa'); // 引入koa
 const router = require('./routes');
 const app = new Koa(); // 创建koa应用
@@ -175,8 +196,10 @@ router.get("/", async (ctx) => {
     ...
 });
 module.exports = router;
-五、连接数据库
+```
+## 五、连接数据库
 1、mysql连接池
+```bash
 // 步骤一
 // 连接数据库，首先需要mysql，所以需要安装
 npm install mysql -s
@@ -229,7 +252,9 @@ const getData = async () => {
   let dataList = await selectAll()
   console.log( dataList )
 }
+```
 2、使用sequelize
+```bash
 // 步骤一
 // 没说的，安装依赖呗
 npm install --save sequelize
@@ -302,7 +327,8 @@ const getUserInfo = async ctx => {
         where: { id: 5 }
     })
 }
-参考文献
+```
+## 参考文献
 自己写的一个简单的koa模型，git仓库地址：
 https://git.lug.ustc.edu.cn/laosan/koa-demo.git
 我与望海潮一起做的小程序的git仓库地址：
