@@ -78,6 +78,7 @@ app.use(async (ctx, next) => {
 ```
 ## 四、路由
 这里我们使用koa-router，它可以将请求的的URL和方法，匹配到对应的逻辑代码中。
+<br />
 1、安装
 ```bash
 npm install koa-router --save
@@ -329,17 +330,17 @@ const getUserInfo = async ctx => {
 }
 ```
 ## 参考文献
-自己写的一个简单的koa模型，git仓库地址：
-https://git.lug.ustc.edu.cn/laosan/koa-demo.git
-我与望海潮一起做的小程序的git仓库地址：
-https://gitee.com/qxgitlab/qx-meeting-koa.git
-我借鉴的某位大佬的koa笔记，git地址：
-https://github.com/chenshenhai/koa2-note
-廖雪峰的koa笔记，博客地址：
-https://www.liaoxuefeng.com/wiki/1022910821149312/1023025933764960
-koa官网：
-https://koa.bootcss.com/#introduction
-koa-router简述：
-https://www.jianshu.com/p/f169c342b4d5
-Sequelize 官网：
-https://www.sequelize.com.cn/
+自己写的一个简单的koa模型，git仓库地址：<br />
+https://git.lug.ustc.edu.cn/laosan/koa-demo.git<br />
+我与望海潮一起做的小程序的git仓库地址：<br />
+https://gitee.com/qxgitlab/qx-meeting-koa.git<br />
+我借鉴的某位大佬的koa笔记，git地址：<br />
+https://github.com/chenshenhai/koa2-note<br />
+廖雪峰的koa笔记，博客地址：<br />
+https://www.liaoxuefeng.com/wiki/1022910821149312/1023025933764960<br />
+koa官网：<br />
+https://koa.bootcss.com/#introduction<br />
+koa-router简述：<br />
+https://www.jianshu.com/p/f169c342b4d5<br />
+Sequelize 官网：<br />
+https://www.sequelize.com.cn/<br />
